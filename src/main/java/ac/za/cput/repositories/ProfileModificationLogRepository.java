@@ -1,7 +1,7 @@
 package ac.za.cput.repositories;
 
-/**
- *
- */
-public interface ProfileModificationLogRepository {
+import ac.za.cput.domain.ProfileModificationLog;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ProfileModificationLogRepository extends CrudRepository<ProfileModificationLog, String> {
 }

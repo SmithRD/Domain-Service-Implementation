@@ -1,18 +1,32 @@
 package ac.za.cput.domain;
 
-
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
+@Entity
 public class ProfileModificationLog implements Serializable {
+
+    @Id
+    private String logID;
     private String profileType;
     private Date dateOfModification;
     private String reasonForModification;
+    @ManyToOne
+    private User user;
+    @ManyToOne
+    private FoodInfo foodInfo;
+    @ManyToOne
+    private Restaurant restaurant;
+    @ManyToOne
     private Administrator administrator;
-    private List<User> userList;
-    private List<FoodInfo> foodInfoList;
-    private List<Restaurant> restaurantList;
+
+
+    public String getLogID() {
+        return logID;
+    }
 
     public String getProfileType() {
         return profileType;
@@ -26,82 +40,47 @@ public class ProfileModificationLog implements Serializable {
         return reasonForModification;
     }
 
-    public Administrator getAdministrator() {
-        return administrator;
-    }
-
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public List<FoodInfo> getFoodInfoList() {
-        return foodInfoList;
-    }
-
-    public List<Restaurant> getRestaurantList() {
-        return restaurantList;
-    }
-
-    public ProfileModificationLog(){
+    public ProfileModificationLog() {
 
     }
 
     public ProfileModificationLog(Builder builder) {
+        this.logID = builder.logID;
         this.profileType = builder.profileType;
         this.dateOfModification = builder.dateOfModification;
         this.reasonForModification = builder.reasonForModification;
-        this.administrator = builder.administrator;
-        this.userList = builder.userList;
-        this.foodInfoList = builder.foodInfoList;
-        this.restaurantList = builder.restaurantList;
     }
 
-    public static class Builder{
+    public static class Builder {
+        private String logID;
         private String profileType;
         private Date dateOfModification;
         private String reasonForModification;
-        private Administrator administrator;
-        private List<User> userList;
-        private List<FoodInfo> foodInfoList;
-        private List<Restaurant> restaurantList;
 
-        public Builder profileType(String value){
+        public Builder logID(String value) {
+            this.logID = value;
+            return this;
+        }
+
+        public Builder profileType(String value) {
             this.profileType = value;
             return this;
         }
 
-        public Builder dateOfModification(Date value){
+        public Builder dateOfModification(Date value) {
             this.dateOfModification = value;
             return this;
         }
 
-        public Builder reasonForModification(String value){
+        public Builder reasonForModification(String value) {
             this.reasonForModification = value;
             return this;
         }
 
-        public Builder administrator(Administrator value){
-            this.administrator = value;
-            return this;
-        }
-
-        public Builder userList(List<User> value){
-            this.userList = value;
-            return this;
-        }
-
-        public Builder foodInfoList(List<FoodInfo> value){
-            this.foodInfoList = value;
-            return this;
-        }
-
-        public Builder restaurantList(List<Restaurant> value){
-            this.restaurantList = value;
-            return this;
-        }
-
-        public ProfileModificationLog build(){
+        public ProfileModificationLog build() {
             return new ProfileModificationLog(this);
         }
+
+
     }
-}
+    }

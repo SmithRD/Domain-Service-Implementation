@@ -1,20 +1,33 @@
 package ac.za.cput.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Entity
 public class FoodInfo implements Serializable {
-    private String foodName;
+
+    @Id
     private String foodPictureID;
+    private String coarseName;
+    private String foodName;
     private Boolean foodStateActive;
-    private DietaryLaw dietaryLaw;
-    private FoodCoarse foodCoarse;
+    private Integer ratingValue;
+    private String ratingComment;
+    private Date ratingDate;
+    @ManyToOne
+    private User user;
+    @ManyToOne
     private Restaurant restaurant;
+
 
     public String getFoodName() {
         return foodName;
     }
+
+    public String getCoarseName() { return coarseName; }
 
     public String getFoodPictureID() {
         return foodPictureID;
@@ -24,41 +37,53 @@ public class FoodInfo implements Serializable {
         return foodStateActive;
     }
 
-    public DietaryLaw getDietaryLaw() {
-        return dietaryLaw;
+    public Integer getRatingValue() {
+        return ratingValue;
     }
 
-    public FoodCoarse getFoodCoarse() {
-        return foodCoarse;
+    public String getRatingComment() {
+        return ratingComment;
     }
 
-    public Restaurant getRestaurant() {
-        return restaurant;
+    public Date getRatingDate() {
+        return ratingDate;
     }
+
+
 
     public FoodInfo(){
-        List<FoodRating>foodRating  = new ArrayList<FoodRating>();
+
     }
 
     public FoodInfo(Builder builder) {
         this.foodName = builder.foodName;
+        this.coarseName = builder.coarseName;
         this.foodPictureID = builder.foodPictureID;
         this.foodStateActive = builder.foodStateActive;
-        this.dietaryLaw = builder.dietaryLaw;
-        this.foodCoarse = builder.foodCoarse;
-        this.restaurant = builder.restaurant;
+        this.ratingValue = builder.ratingValue;
+        this.ratingComment = builder.ratingComment;
+        this.ratingDate = builder.ratingDate;
+
     }
 
     public static class Builder{
         private String foodName;
+        private String coarseName;
         private String foodPictureID;
         private Boolean foodStateActive;
-        private DietaryLaw dietaryLaw;
-        private FoodCoarse foodCoarse;
-        private Restaurant restaurant;
+        private Integer ratingValue;
+        private String ratingComment;
+        private Date ratingDate;
+
+
 
         public Builder foodName(String value){
             this.foodName = value;
+            return this;
+        }
+
+        public Builder coarseName(String value) {
+            this.coarseName = value;
             return this;
         }
 
@@ -72,18 +97,18 @@ public class FoodInfo implements Serializable {
             return this;
         }
 
-        public Builder dietaryLaw(DietaryLaw value){
-            this.dietaryLaw = value;
+        public Builder ratingValue(Integer value){
+            this.ratingValue = value;
             return this;
         }
 
-        public Builder  foodCoarse(FoodCoarse value){
-            this. foodCoarse = value;
+        public Builder ratingComment(String value){
+            this.ratingComment = value;
             return this;
         }
 
-        public Builder  restaurant(Restaurant value){
-            this. restaurant = value;
+        public Builder ratingDate(Date value){
+            this.ratingDate = value;
             return this;
         }
 

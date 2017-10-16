@@ -1,14 +1,24 @@
 package ac.za.cput.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
+@Entity
 public class Administrator implements Serializable {
-    private String adminEmail;
+
+    @Id
     private String adminID;
+    private String adminEmail;
     private String adminFirstName;
     private String adminLastName;
     private String adminPassword;
-    private AdminAddress adminAddress;
+    private String adminAddress1;
+    private String adminAddress2;
+    private Integer adminPostalCode;
+    private String adminContactNumber1;
+    private String adminContactNumber2;
+
+
 
     public String getAdminEmail() {
         return adminEmail;
@@ -30,12 +40,18 @@ public class Administrator implements Serializable {
         return adminPassword;
     }
 
-    public AdminAddress getAdminAddress() {
-        return adminAddress;
-    }
+    public String getAdminAddress1() { return adminAddress1; }
+
+    public String getAdminAddress2() { return adminAddress2; }
+
+    public Integer getAdminPostalCode() { return adminPostalCode; }
+
+    public String getAdminContactNumber1() { return adminContactNumber1; }
+
+    public String getAdminContactNumber2() { return adminContactNumber2; }
+
 
     public Administrator(){
-        AdminContact adminContact = new AdminContact();
     }
 
     public Administrator(Builder builder) {
@@ -44,7 +60,13 @@ public class Administrator implements Serializable {
         this.adminFirstName = builder.adminFirstName;
         this.adminLastName = builder.adminLastName;
         this.adminPassword = builder.adminPassword;
-        this.adminAddress = builder.adminAddress;
+        this.adminAddress1 = builder.adminAddress1;
+        this.adminAddress2 = builder.adminAddress2;
+        this.adminPostalCode = builder.adminPostalCode;
+        this.adminContactNumber1 = builder.adminContactNumber1;
+        this.adminContactNumber2 = builder.adminContactNumber2;
+
+
     }
 
     public static class Builder {
@@ -53,7 +75,13 @@ public class Administrator implements Serializable {
         private String adminFirstName;
         private String adminLastName;
         private String adminPassword;
-        private AdminAddress adminAddress;
+        private String adminAddress1;
+        private String adminAddress2;
+        private Integer adminPostalCode;
+        private String adminContactNumber1;
+        private String adminContactNumber2;
+
+
 
         public Builder adminEmail(String value) {
             this.adminEmail = value;
@@ -80,10 +108,34 @@ public class Administrator implements Serializable {
             return this;
         }
 
-        public Builder adminAddress(AdminAddress value) {
-            this.adminAddress = value;
+
+        public Builder adminAddress1(String value) {
+            this.adminAddress1 = value;
             return this;
         }
+
+        public Builder adminAddress2(String value) {
+            this.adminAddress2 = value;
+            return this;
+        }
+
+        public Builder adminPostalCode(Integer value) {
+            this.adminPostalCode = value;
+            return this;
+        }
+
+        public Builder adminContactNumber1(String value) {
+            this.adminContactNumber1 = value;
+            return this;
+        }
+
+        public Builder adminContactNumber2(String value) {
+            this.adminContactNumber2 = value;
+            return this;
+        }
+
+
+
 
         public Administrator build() {
             return new Administrator(this);
